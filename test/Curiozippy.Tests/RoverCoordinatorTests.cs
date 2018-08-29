@@ -40,6 +40,17 @@ namespace Curiozippy.Tests
         }
 
         [Fact]
+        public void Should_not_let_rover_go_out_of_bounds()
+        {
+            var coordinator = new RoverCoordinator(5, 5);
+
+            var roverId = coordinator.DeployRover(1, 2, 'N');
+            var status = coordinator.CommandRover(roverId, "MMMMM"); // result is 1 3 
+
+            Assert.Equal("1 5 N", status);
+        }
+
+        [Fact]
         public void Command_should_be_valid()
         {
             var coordinator = new RoverCoordinator(5, 5);

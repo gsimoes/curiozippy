@@ -96,6 +96,16 @@ namespace Curiozippy
                     {
                         var position = rover.NextPosition();
 
+                        if (position.x < 0 || position.x > _plateauX)
+                        {
+                            return;
+                        }
+
+                        if (position.y < 0 || position.y > _plateauY)
+                        {
+                            return;
+                        }
+
                         if (_obstacles.Contains($"{position.x}:{position.y}"))
                         {
                             // don't move if obstable ahead
@@ -105,10 +115,9 @@ namespace Curiozippy
                         position = rover.Position();
 
                         _obstacles.Remove($"{position.x}:{position.y}");
-                        // todo: colision control / out of bounds
                         position = rover.Move();
-
                         _obstacles.Add($"{position.x}:{position.y}");
+
                         break;
                     }
                 default:
