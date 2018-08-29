@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace ZipCurious.Tests
+namespace Curiozippy.Tests
 {
     public class RoverTests
     {

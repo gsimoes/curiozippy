@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{BB73132C-5EA4-4AD5-922F-9271ACFE7068}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZipCurious.Tests", "test\ZipCurious.Tests\ZipCurious.Tests.csproj", "{F899D612-E527-4844-8722-F3779352AFAE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Curiozippy.Tests", "test\Curiozippy.Tests\Curiozippy.Tests.csproj", "{F899D612-E527-4844-8722-F3779352AFAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
