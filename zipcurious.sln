@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26124.0
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{BB73132C-5EA4-4AD5-922F-9271ACFE7068}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZipCurious.Tests", "test\ZipCurious.Tests\ZipCurious.Tests.csproj", "{F899D612-E527-4844-8722-F3779352AFAE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F899D612-E527-4844-8722-F3779352AFAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F899D612-E527-4844-8722-F3779352AFAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F899D612-E527-4844-8722-F3779352AFAE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F899D612-E527-4844-8722-F3779352AFAE}.Debug|x64.Build.0 = Debug|Any CPU
+		{F899D612-E527-4844-8722-F3779352AFAE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F899D612-E527-4844-8722-F3779352AFAE}.Debug|x86.Build.0 = Debug|Any CPU
+		{F899D612-E527-4844-8722-F3779352AFAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F899D612-E527-4844-8722-F3779352AFAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F899D612-E527-4844-8722-F3779352AFAE}.Release|x64.ActiveCfg = Release|Any CPU
+		{F899D612-E527-4844-8722-F3779352AFAE}.Release|x64.Build.0 = Release|Any CPU
+		{F899D612-E527-4844-8722-F3779352AFAE}.Release|x86.ActiveCfg = Release|Any CPU
+		{F899D612-E527-4844-8722-F3779352AFAE}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F899D612-E527-4844-8722-F3779352AFAE} = {BB73132C-5EA4-4AD5-922F-9271ACFE7068}
+	EndGlobalSection
+EndGlobal
