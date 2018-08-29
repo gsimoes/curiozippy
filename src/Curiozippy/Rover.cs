@@ -42,14 +42,19 @@ namespace Curiozippy
             _direction = _directions.Find(direction);
         }
 
-        public (int x, int y, Direction direction) PeekNext()
+        public (int x, int y, Direction direction) NextPosition()
         {
             var action = _actions[_direction.Value];
             var next = action(_x, _y);
 
             return (x: next.x, y: next.y, direction: _direction.Value);
         }
-        
+
+        public (int x, int y, Direction direction) Position()
+        {
+            return (x: _x, y: _y, direction: _direction.Value);
+        }
+
         public (int x, int y, Direction direction) Move()
         {
             var action = _actions[_direction.Value];

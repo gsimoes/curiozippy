@@ -10,7 +10,7 @@ namespace Curiozippy.Tests
         public void Rover_has_initial_direction()
         {
             var rover = new Rover(0, 0, Direction.South);
-            var next = rover.PeekNext();
+            var next = rover.NextPosition();
 
             Assert.Equal(Direction.South, next.direction);
         }
@@ -21,16 +21,16 @@ namespace Curiozippy.Tests
             var rover = new Rover(0, 0, Direction.North);
 
             rover.RotateRight();
-            Assert.Equal(Direction.East, rover.PeekNext().direction);
+            Assert.Equal(Direction.East, rover.NextPosition().direction);
 
             rover.RotateRight();
-            Assert.Equal(Direction.South, rover.PeekNext().direction);
+            Assert.Equal(Direction.South, rover.NextPosition().direction);
 
             rover.RotateRight();
-            Assert.Equal(Direction.West, rover.PeekNext().direction);
+            Assert.Equal(Direction.West, rover.NextPosition().direction);
 
             rover.RotateRight();
-            Assert.Equal(Direction.North, rover.PeekNext().direction);
+            Assert.Equal(Direction.North, rover.NextPosition().direction);
         }
 
         [Fact]
@@ -39,36 +39,36 @@ namespace Curiozippy.Tests
             var rover = new Rover(0, 0, Direction.North);
 
             rover.RotateLeft();
-            Assert.Equal(Direction.West, rover.PeekNext().direction);
+            Assert.Equal(Direction.West, rover.NextPosition().direction);
 
             rover.RotateLeft();
-            Assert.Equal(Direction.South, rover.PeekNext().direction);
+            Assert.Equal(Direction.South, rover.NextPosition().direction);
 
             rover.RotateLeft();
-            Assert.Equal(Direction.East, rover.PeekNext().direction);
+            Assert.Equal(Direction.East, rover.NextPosition().direction);
 
             rover.RotateLeft();
-            Assert.Equal(Direction.North, rover.PeekNext().direction);
+            Assert.Equal(Direction.North, rover.NextPosition().direction);
         }
 
         [Fact]
-        public void PeekNext_should_return_next_planned_movement_and_direction()
+        public void NextPosition_should_return_next_planned_movement_and_direction()
         {
             var rover = new Rover(0, 0, Direction.North);
-            var next = rover.PeekNext();
+            var next = rover.NextPosition();
 
             Assert.Equal((x: 0, y: 1, direction: Direction.North), next);
 
             rover.RotateRight();
-            next = rover.PeekNext();
+            next = rover.NextPosition();
             Assert.Equal((x: 1, y: 0, direction: Direction.East), next);
 
             rover.RotateRight();
-            next = rover.PeekNext();
+            next = rover.NextPosition();
             Assert.Equal((x: 0, y: -1, direction: Direction.South), next);
 
             rover.RotateRight();
-            next = rover.PeekNext();
+            next = rover.NextPosition();
             Assert.Equal((x: -1, y: 0, direction: Direction.West), next);
         }
 

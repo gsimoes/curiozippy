@@ -19,6 +19,27 @@ namespace Curiozippy.Tests
         }
 
         [Fact]
+        public void Deploy_rover_aborts_if_coordinate_occupied()
+        {
+            var coordinator = new RoverCoordinator(5, 5);
+
+            coordinator.DeployRover(0, 1, 'N');
+
+            Assert.Throws<InvalidOperationException>(() => coordinator.DeployRover(0, 1, 'N'));
+        }
+
+        [Fact]
+        public void Deploy_rover_aborts_if_coordinate_occupied_after_movement()
+        {
+            var coordinator = new RoverCoordinator(5, 5);
+
+            var roverId = coordinator.DeployRover(1, 2, 'N');
+            var status = coordinator.CommandRover(roverId, "LMLMLMLMM"); // result is 1 3 
+
+            Assert.Throws<InvalidOperationException>(() => coordinator.DeployRover(1, 3, 'S'));
+        }
+
+        [Fact]
         public void Command_should_be_valid()
         {
             var coordinator = new RoverCoordinator(5, 5);
@@ -37,7 +58,7 @@ namespace Curiozippy.Tests
             var coordinator = new RoverCoordinator(5, 5);
             var roverId1 = coordinator.DeployRover(1, 2, 'N');
             var status1 = coordinator.CommandRover(roverId1, "LMLMLMLMM");
-            
+
             var roverId2 = coordinator.DeployRover(3, 3, 'E');
             var status2 = coordinator.CommandRover(roverId2, "MMRMMRMRRM");
 
