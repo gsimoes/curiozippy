@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{BB73132C-5
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Curiozippy.Tests", "test\Curiozippy.Tests\Curiozippy.Tests.csproj", "{F899D612-E527-4844-8722-F3779352AFAE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BAB84A0F-EA1F-4599-AD32-4082377BAC54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Curiozippy", "src\Curiozippy\Curiozippy.csproj", "{DC7FC54C-377A-4EE8-A2C4-40E94F68F03F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,8 +36,21 @@ Global
 		{F899D612-E527-4844-8722-F3779352AFAE}.Release|x64.Build.0 = Release|Any CPU
 		{F899D612-E527-4844-8722-F3779352AFAE}.Release|x86.ActiveCfg = Release|Any CPU
 		{F899D612-E527-4844-8722-F3779352AFAE}.Release|x86.Build.0 = Release|Any CPU
+		{DC7FC54C-377A-4EE8-A2C4-40E94F68F03F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC7FC54C-377A-4EE8-A2C4-40E94F68F03F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC7FC54C-377A-4EE8-A2C4-40E94F68F03F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DC7FC54C-377A-4EE8-A2C4-40E94F68F03F}.Debug|x64.Build.0 = Debug|Any CPU
+		{DC7FC54C-377A-4EE8-A2C4-40E94F68F03F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DC7FC54C-377A-4EE8-A2C4-40E94F68F03F}.Debug|x86.Build.0 = Debug|Any CPU
+		{DC7FC54C-377A-4EE8-A2C4-40E94F68F03F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC7FC54C-377A-4EE8-A2C4-40E94F68F03F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC7FC54C-377A-4EE8-A2C4-40E94F68F03F}.Release|x64.ActiveCfg = Release|Any CPU
+		{DC7FC54C-377A-4EE8-A2C4-40E94F68F03F}.Release|x64.Build.0 = Release|Any CPU
+		{DC7FC54C-377A-4EE8-A2C4-40E94F68F03F}.Release|x86.ActiveCfg = Release|Any CPU
+		{DC7FC54C-377A-4EE8-A2C4-40E94F68F03F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F899D612-E527-4844-8722-F3779352AFAE} = {BB73132C-5EA4-4AD5-922F-9271ACFE7068}
+		{DC7FC54C-377A-4EE8-A2C4-40E94F68F03F} = {BAB84A0F-EA1F-4599-AD32-4082377BAC54}
 	EndGlobalSection
 EndGlobal
