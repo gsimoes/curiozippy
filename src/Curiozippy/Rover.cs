@@ -49,7 +49,7 @@ namespace Curiozippy
 
             return (x: next.x, y: next.y, direction: _direction.Value);
         }
-
+        
         public (int x, int y, Direction direction) Move()
         {
             var action = _actions[_direction.Value];
@@ -61,14 +61,23 @@ namespace Curiozippy
             return (x: _x, y: _y, direction: _direction.Value);
         }
 
-        public void RotateLeft()
+        public (int x, int y, Direction direction) RotateLeft()
         {
             _direction = _direction.Previous ?? _directions.Last;
+
+            return (x: _x, y: _y, direction: _direction.Value);
         }
 
-        public void RotateRight()
+        public (int x, int y, Direction direction) RotateRight()
         {
             _direction = _direction.Next ?? _directions.First;
+
+            return (x: _x, y: _y, direction: _direction.Value);
+        }
+
+        public override string ToString()
+        {
+            return $"{_x} {_y} {_direction.Value.ToString()[0]}";
         }
     }
 }
