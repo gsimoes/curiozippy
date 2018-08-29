@@ -10,8 +10,9 @@ namespace ZipCurious.Tests
         public void Rover_has_initial_direction()
         {
             var rover = new Rover(0, 0, Direction.South);
+            var next = rover.Peek();
 
-            Assert.Equal(Direction.South, rover.Peek());
+            Assert.Equal(Direction.South, next.direction);
         }
 
         [Fact]
@@ -20,16 +21,16 @@ namespace ZipCurious.Tests
             var rover = new Rover(0, 0, Direction.North);
 
             rover.RotateRight();
-            Assert.Equal(Direction.East, rover.Peek());
+            Assert.Equal(Direction.East, rover.Peek().direction);
             
             rover.RotateRight();
-            Assert.Equal(Direction.South, rover.Peek());
+            Assert.Equal(Direction.South, rover.Peek().direction);
 
             rover.RotateRight();
-            Assert.Equal(Direction.West, rover.Peek());
+            Assert.Equal(Direction.West, rover.Peek().direction);
 
             rover.RotateRight();
-            Assert.Equal(Direction.North, rover.Peek());
+            Assert.Equal(Direction.North, rover.Peek().direction);
         }
 
         [Fact]
@@ -38,18 +39,17 @@ namespace ZipCurious.Tests
             var rover = new Rover(0, 0, Direction.North);
 
             rover.RotateLeft();
-            Assert.Equal(Direction.West, rover.Peek());
+            Assert.Equal(Direction.West, rover.Peek().direction);
             
             rover.RotateLeft();
-            Assert.Equal(Direction.South, rover.Peek());
+            Assert.Equal(Direction.South, rover.Peek().direction);
 
             rover.RotateLeft();
-            Assert.Equal(Direction.East, rover.Peek());
+            Assert.Equal(Direction.East, rover.Peek().direction);
 
             rover.RotateLeft();
-            Assert.Equal(Direction.North, rover.Peek());
+            Assert.Equal(Direction.North, rover.Peek().direction);
         }
-
     }
 
     enum Direction
@@ -84,9 +84,9 @@ namespace ZipCurious.Tests
             _currentAction = _actions.Find(direction);
         }
 
-        public Direction Peek()
+        public (int x, int y, Direction direction) Peek()
         {
-            return _currentAction.Value;
+            return (x: _x, y: _y, direction: _currentAction.Value);
         }
 
         public void RotateLeft()
