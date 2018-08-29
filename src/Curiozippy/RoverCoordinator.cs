@@ -42,49 +42,54 @@ public class RoverCoordinator
             throw new ArgumentException("Invalid direction", nameof(direction));
         }
 
+        // todo: verify if there is a rover in that coordinate
         var roverId = _rovers.Count + 1;
         _rovers.Add(roverId, new Rover(x, y, _directions[direction]));
 
         return roverId;
     }
 
-    public string CommandRover(int roverId, string command)
+    public string CommandRover(int roverId, string commands)
     {
         if (!_rovers.ContainsKey(roverId))
         {
             throw new InvalidOperationException($"Rover {roverId} disconnected!!");
         }
 
-        var validCommand = !string.IsNullOrEmpty(command) && Regex.IsMatch(command, @"^[LRM]*$");
+        var validCommand = !string.IsNullOrEmpty(commands) && Regex.IsMatch(commands, @"^[LRM]*$");
 
         if (!validCommand)
         {
-            throw new ArgumentException("Invalid command", nameof(command));
+            throw new ArgumentException("Invalid command", nameof(commands));
         }
 
         var rover = _rovers[roverId];
 
-        command
-            .Select(c => c)
-            .ToList()
-            .ForEach(c =>
-            {
-                switch (c)
-                {
-                    case 'L':
-                        rover.RotateLeft();
-                        break;
-                    case 'R':
-                        rover.RotateRight();
-                        break;
-                    case 'M':
-                        rover.Move();
-                        break;
-                    default:
-                        break;
-                }
-            });
+        foreach (var command in commands)
+        {
+            SendCommand(rover, command);
+        }
 
         return rover.ToString();
+    }
+
+    private void SendCommand(Rover rover, char command)
+    {
+        switch (command)
+        {
+            case 'L':
+                rover.RotateLeft();
+                break;
+            case 'R':
+                rover.RotateRight();
+                break;
+            case 'M':
+                // todo: colision control / out of bounds
+                rover.Move();
+                break;
+            default:
+                break;
+        }
+
     }
 }
