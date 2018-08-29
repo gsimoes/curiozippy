@@ -10,7 +10,7 @@ namespace ZipCurious.Tests
         public void Rover_has_initial_direction()
         {
             var rover = new Rover(0, 0, Direction.South);
-            var next = rover.Peek();
+            var next = rover.PeekNext();
 
             Assert.Equal(Direction.South, next.direction);
         }
@@ -21,16 +21,16 @@ namespace ZipCurious.Tests
             var rover = new Rover(0, 0, Direction.North);
 
             rover.RotateRight();
-            Assert.Equal(Direction.East, rover.Peek().direction);
-            
-            rover.RotateRight();
-            Assert.Equal(Direction.South, rover.Peek().direction);
+            Assert.Equal(Direction.East, rover.PeekNext().direction);
 
             rover.RotateRight();
-            Assert.Equal(Direction.West, rover.Peek().direction);
+            Assert.Equal(Direction.South, rover.PeekNext().direction);
 
             rover.RotateRight();
-            Assert.Equal(Direction.North, rover.Peek().direction);
+            Assert.Equal(Direction.West, rover.PeekNext().direction);
+
+            rover.RotateRight();
+            Assert.Equal(Direction.North, rover.PeekNext().direction);
         }
 
         [Fact]
@@ -39,16 +39,37 @@ namespace ZipCurious.Tests
             var rover = new Rover(0, 0, Direction.North);
 
             rover.RotateLeft();
-            Assert.Equal(Direction.West, rover.Peek().direction);
-            
-            rover.RotateLeft();
-            Assert.Equal(Direction.South, rover.Peek().direction);
+            Assert.Equal(Direction.West, rover.PeekNext().direction);
 
             rover.RotateLeft();
-            Assert.Equal(Direction.East, rover.Peek().direction);
+            Assert.Equal(Direction.South, rover.PeekNext().direction);
 
             rover.RotateLeft();
-            Assert.Equal(Direction.North, rover.Peek().direction);
+            Assert.Equal(Direction.East, rover.PeekNext().direction);
+
+            rover.RotateLeft();
+            Assert.Equal(Direction.North, rover.PeekNext().direction);
+        }
+
+        [Fact]
+        public void PeekNext_should_return_next_planned_movement_and_direction()
+        {
+            var rover = new Rover(0, 0, Direction.North);
+            var next = rover.PeekNext();
+
+            Assert.Equal((x: 0, y: 1, direction: Direction.North), next);
+
+            rover.RotateRight();
+            next = rover.PeekNext();
+            Assert.Equal((x: 1, y: 0, direction: Direction.East), next);
+
+            rover.RotateRight();
+            next = rover.PeekNext();
+            Assert.Equal((x: 0, y: -1, direction: Direction.South), next);
+
+            rover.RotateRight();
+            next = rover.PeekNext();
+            Assert.Equal((x: -1, y: 0, direction: Direction.West), next);
         }
     }
 
@@ -65,8 +86,17 @@ namespace ZipCurious.Tests
         private int _x;
         private int _y;
         private Direction _direction;
-        private LinkedList<Direction> _actions;
+        private LinkedList<Direction> _directions;
         private LinkedListNode<Direction> _currentAction;
+
+        private static Dictionary<Direction, Func<int, int, (int x, int y)>> _actions
+            = new Dictionary<Direction, Func<int, int, (int x, int y)>>()
+            {
+                { Direction.North, (x, y) => (x: x, y: y + 1)  },
+                { Direction.East, (x, y) => (x: x + 1, y: y)  },
+                { Direction.South, (x, y) => (x: x, y: y - 1)  },
+                { Direction.West, (x, y) => (x: x - 1, y: y)  }
+            };
 
         public Rover(int x, int y, Direction direction)
         {
@@ -74,29 +104,32 @@ namespace ZipCurious.Tests
             _y = y;
             _direction = direction;
 
-            _actions = new LinkedList<Direction>();
+            _directions = new LinkedList<Direction>();
 
-            _actions.AddLast(Direction.North);
-            _actions.AddLast(Direction.East);
-            _actions.AddLast(Direction.South);
-            _actions.AddLast(Direction.West);
+            _directions.AddLast(Direction.North);
+            _directions.AddLast(Direction.East);
+            _directions.AddLast(Direction.South);
+            _directions.AddLast(Direction.West);
 
-            _currentAction = _actions.Find(direction);
+            _currentAction = _directions.Find(direction);
         }
 
-        public (int x, int y, Direction direction) Peek()
+        public (int x, int y, Direction direction) PeekNext()
         {
-            return (x: _x, y: _y, direction: _currentAction.Value);
+            var action = _actions[_currentAction.Value];
+            var next = action(_x, _y);
+
+            return (x: next.x, y: next.y, direction: _currentAction.Value);
         }
 
         public void RotateLeft()
         {
-            _currentAction = _currentAction.Previous ?? _actions.Last;
+            _currentAction = _currentAction.Previous ?? _directions.Last;
         }
 
         public void RotateRight()
         {
-            _currentAction = _currentAction.Next ?? _actions.First;
+            _currentAction = _currentAction.Next ?? _directions.First;
         }
     }
 }
