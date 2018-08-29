@@ -19,18 +19,37 @@ namespace ZipCurious.Tests
         {
             var rover = new Rover(0, 0, Direction.North);
 
-            rover.RotateLeft();
+            rover.RotateRight();
             Assert.Equal(Direction.East, rover.Peek());
+            
+            rover.RotateRight();
+            Assert.Equal(Direction.South, rover.Peek());
+
+            rover.RotateRight();
+            Assert.Equal(Direction.West, rover.Peek());
+
+            rover.RotateRight();
+            Assert.Equal(Direction.North, rover.Peek());
+        }
+
+        [Fact]
+        public void When_rotate_left_direction_goes_counter_clockwise()
+        {
+            var rover = new Rover(0, 0, Direction.North);
+
+            rover.RotateLeft();
+            Assert.Equal(Direction.West, rover.Peek());
             
             rover.RotateLeft();
             Assert.Equal(Direction.South, rover.Peek());
 
             rover.RotateLeft();
-            Assert.Equal(Direction.West, rover.Peek());
+            Assert.Equal(Direction.East, rover.Peek());
 
             rover.RotateLeft();
             Assert.Equal(Direction.North, rover.Peek());
         }
+
     }
 
     enum Direction
@@ -71,6 +90,11 @@ namespace ZipCurious.Tests
         }
 
         public void RotateLeft()
+        {
+            _currentAction = _currentAction.Previous ?? _actions.Last;
+        }
+
+        public void RotateRight()
         {
             _currentAction = _currentAction.Next ?? _actions.First;
         }
