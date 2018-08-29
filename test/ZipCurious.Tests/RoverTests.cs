@@ -71,6 +71,27 @@ namespace ZipCurious.Tests
             next = rover.PeekNext();
             Assert.Equal((x: -1, y: 0, direction: Direction.West), next);
         }
+
+        [Fact]
+        public void Move_will_change_rover_coordinates()
+        {
+            var rover = new Rover(0, 0, Direction.North);
+            var status = rover.Move();
+
+            Assert.Equal((x: 0, y: 1, direction: Direction.North), status);
+
+            rover.RotateRight();
+            status = rover.Move();
+            Assert.Equal((x: 1, y: 1, direction: Direction.East), status);
+
+            rover.RotateRight();
+            status = rover.Move();
+            Assert.Equal((x: 1, y: 0, direction: Direction.South), status);
+
+            rover.RotateRight();
+            status = rover.Move();
+            Assert.Equal((x: 0, y: 0, direction: Direction.West), status);
+        }
     }
 
     enum Direction
@@ -85,9 +106,8 @@ namespace ZipCurious.Tests
     {
         private int _x;
         private int _y;
-        private Direction _direction;
         private LinkedList<Direction> _directions;
-        private LinkedListNode<Direction> _currentAction;
+        private LinkedListNode<Direction> _direction;
 
         private static Dictionary<Direction, Func<int, int, (int x, int y)>> _actions
             = new Dictionary<Direction, Func<int, int, (int x, int y)>>()
@@ -102,7 +122,6 @@ namespace ZipCurious.Tests
         {
             _x = x;
             _y = y;
-            _direction = direction;
 
             _directions = new LinkedList<Direction>();
 
@@ -111,25 +130,36 @@ namespace ZipCurious.Tests
             _directions.AddLast(Direction.South);
             _directions.AddLast(Direction.West);
 
-            _currentAction = _directions.Find(direction);
+            _direction = _directions.Find(direction);
         }
 
         public (int x, int y, Direction direction) PeekNext()
         {
-            var action = _actions[_currentAction.Value];
+            var action = _actions[_direction.Value];
             var next = action(_x, _y);
 
-            return (x: next.x, y: next.y, direction: _currentAction.Value);
+            return (x: next.x, y: next.y, direction: _direction.Value);
+        }
+
+        public (int x, int y, Direction direction) Move()
+        {
+            var action = _actions[_direction.Value];
+            var next = action(_x, _y);
+
+            _x = next.x;
+            _y = next.y;
+
+            return (x: _x, y: _y, direction: _direction.Value);
         }
 
         public void RotateLeft()
         {
-            _currentAction = _currentAction.Previous ?? _directions.Last;
+            _direction = _direction.Previous ?? _directions.Last;
         }
 
         public void RotateRight()
         {
-            _currentAction = _currentAction.Next ?? _directions.First;
+            _direction = _direction.Next ?? _directions.First;
         }
     }
 }
