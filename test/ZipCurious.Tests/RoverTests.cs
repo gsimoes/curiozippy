@@ -4,7 +4,7 @@ using Xunit;
 
 namespace ZipCurious.Tests
 {
-    public class UnitTest1
+    public class RoverTests
     {
         [Fact]
         public void Rover_has_initial_direction()
@@ -12,6 +12,24 @@ namespace ZipCurious.Tests
             var rover = new Rover(0, 0, Direction.South);
 
             Assert.Equal(Direction.South, rover.Peek());
+        }
+
+        [Fact]
+        public void When_rotate_right_direction_goes_clockwise()
+        {
+            var rover = new Rover(0, 0, Direction.North);
+
+            rover.RotateLeft();
+            Assert.Equal(Direction.East, rover.Peek());
+            
+            rover.RotateLeft();
+            Assert.Equal(Direction.South, rover.Peek());
+
+            rover.RotateLeft();
+            Assert.Equal(Direction.West, rover.Peek());
+
+            rover.RotateLeft();
+            Assert.Equal(Direction.North, rover.Peek());
         }
     }
 
@@ -28,6 +46,7 @@ namespace ZipCurious.Tests
         private int _x;
         private int _y;
         private Direction _direction;
+        private LinkedList<Direction> _actions;
         private LinkedListNode<Direction> _currentAction;
 
         public Rover(int x, int y, Direction direction)
@@ -36,14 +55,14 @@ namespace ZipCurious.Tests
             _y = y;
             _direction = direction;
 
-            var actions = new LinkedList<Direction>();
+            _actions = new LinkedList<Direction>();
 
-            actions.AddLast(Direction.North);
-            actions.AddLast(Direction.East);
-            actions.AddLast(Direction.South);
-            actions.AddLast(Direction.West);
+            _actions.AddLast(Direction.North);
+            _actions.AddLast(Direction.East);
+            _actions.AddLast(Direction.South);
+            _actions.AddLast(Direction.West);
 
-            _currentAction = actions.Find(direction);
+            _currentAction = _actions.Find(direction);
         }
 
         public Direction Peek()
@@ -53,7 +72,7 @@ namespace ZipCurious.Tests
 
         public void RotateLeft()
         {
-
+            _currentAction = _currentAction.Next ?? _actions.First;
         }
     }
 }
